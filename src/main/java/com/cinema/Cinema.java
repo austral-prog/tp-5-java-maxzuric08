@@ -117,6 +117,6 @@ public class Cinema {
      */
     public void releaseSeats(Seat seat, int amount) {
         butacas+=amount;
-        if (butacas<0)throw new ArrayIndexOutOfBoundsException("Row index out of bounds");
+        if (butacas<0 || butacas+amount>5)throw new ArrayIndexOutOfBoundsException("Row index out of bounds");
 
 }}
