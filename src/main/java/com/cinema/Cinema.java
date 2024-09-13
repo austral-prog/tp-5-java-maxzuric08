@@ -116,7 +116,7 @@ public class Cinema {
      * @param amount la cantidad de butacas a liberar.
      */
     public void releaseSeats(Seat seat, int amount) {
-        if (amount<=5){butacas+=amount;}
-        throw new ArrayIndexOutOfBoundsException("Row index out of bounds");
+        butacas+=amount;
+        if (butacas<0)throw new ArrayIndexOutOfBoundsException("Row index out of bounds");
 
 }}
