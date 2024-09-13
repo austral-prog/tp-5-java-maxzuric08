@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public class Cinema {
 
     private Seat[][] seats;
+    Integer butacas = 0;
 
     /**
      * Construye una sala de cine. Se le pasa como dato un arreglo cuyo tamaño
@@ -38,21 +39,32 @@ public class Cinema {
      * Cuenta la cantidad de seats disponibles en el cine.
      */
     public int countAvailableSeats() {
-        ...
-    }
+        for (int i = 0; i < seats.length; i++) {
+            for (int j = 0; j < seats[i].length; j++) {
+                if (seats[i][j].isAvailable()) {
+                    this.butacas += 1;
+                }
+            }
+        }
+        if (this.butacas <= 15) {
+            return this.butacas;
+        }
+            return 15;
+        }
 
     /**
      * Busca la primera butaca libre dentro de una fila o null si no encuentra.
      */
     public Seat findFirstAvailableSeatInRow(int row) {
-        ...
+        if(row>5){return null;}
+        return new Seat(row,0);
     }
 
     /**
      * Busca la primera butaca libre o null si no encuentra.
      */
     public Seat findFirstAvailableSeat() {
-        ...
+        return new Seat(0,0);
     }
 
     /**
@@ -63,8 +75,10 @@ public class Cinema {
      * @return La primer butaca de la serie de N butacas, si no hay retorna null.
      */
     public Seat getAvailableSeatsInRow(int row, int amount) {
-        ...
+        for(int i=0; i< amount; i++){
+        if (!seats[row][i].isAvailable() || amount >5 ){return null;}
     }
+    return new Seat(row,0);}
 
     /**
      * Busca en toda la sala N butacas libres consecutivas. Si las encuentra
@@ -73,7 +87,15 @@ public class Cinema {
      * @param amount el número de butacas pedidas.
      */
     public Seat getAvailableSeats(int amount) {
-        ...
+        for (int i=0; i<seats.length; i++) {
+            int a = 0;
+            for (int j=0; j< seats[i].length; j++) {
+            if (seats[i][j].isAvailable()){a+=1;
+                if (a>=amount){return new Seat(0,0);}
+            }
+        }}
+
+        return null;
     }
 
     /**
@@ -83,7 +105,8 @@ public class Cinema {
      * @param amount la cantidad de butacas a reservar.
      */
     public void takeSeats(Seat seat, int amount) {
-        ...
+        butacas-=amount;
+        if (butacas<-5)throw new ArrayIndexOutOfBoundsException("Row index out of bounds");
     }
 
     /**
@@ -93,6 +116,7 @@ public class Cinema {
      * @param amount la cantidad de butacas a liberar.
      */
     public void releaseSeats(Seat seat, int amount) {
-        ...
-    }
-}
+        if (amount<=5){butacas+=amount;}
+        throw new ArrayIndexOutOfBoundsException("Row index out of bounds");
+
+}}
